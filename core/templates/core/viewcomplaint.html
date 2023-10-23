@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+{% block title %}ViewComplaint{% endblock title %}
+{% block main_contain %}
+<section class="container">
+   <div class="view">
+        <div class="row justify-content-around text-center complainttxt mt-5">
+            <div class="col-sm-8 ">
+                <h3> Complaints</h3>
+            </div>
+        </div>
+
+        {% if request.user.is_authenticated %}
+     <div class="row justify-content-around text-center text-white mt-1">
+            <div class="col-sm-12">
+                <table class="table table-striped">
+                <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Mobile NO</th>
+          <th scope="col">Title</th>
+          <th scope="col">City</th>
+            <th scope="col">Reported Date</th>
+          <th scope="col">Category</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for  comp in compdata %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ comp.name }}</td>
+          <td>{{ comp.mobile_no }}</td>
+          <td>{{ comp.title }}</td>
+          <td>{{ comp.city }}</td>
+          <td>{{ comp.reported_date }}</td>
+             {% if comp.category == 1 %}
+                <td>Accident</td>
+                {% elif comp.category == 2  %}
+                <td>Fraud</td>
+                {% elif comp.category == 3  %}
+                <td>Robbery</td>
+                {% elif comp.category == 4  %}
+                <td>Missing</td>
+                {% elif comp.category == 5  %}
+                <td>Cyber Crime</td>
+                 {% elif comp.category == 6  %}
+                <td>Other</td>
+            {% endif %}
+
+          <td>{{ comp.description }}</td>
+        {% if comp.status == 1 %}
+                <td>Pending</td>
+                {% elif comp.status == 2  %}
+                <td>Progress</td>
+                {% elif comp.status == 3  %}
+                <td>Close</td>
+            {% endif %}
+        </tr>
+      {% endfor %}
+
+      </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+   </div>
+</section>
+{% endblock main_contain %}

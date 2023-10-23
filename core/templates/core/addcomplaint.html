@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% block title %}AddComplaint{% endblock title %}
+{% block main_contain %}
+<div class="full">
+    <div class="container p-5 pt20 ">
+        <div class="row ">
+            <div class="col-sm-12">
+                <h3 class=" text-center ">Add Complaint</h3>
+            </div>
+        </div>
+
+        <div class="row justify-content-around" >
+            <div class="col-sm-12">
+                    {% if request.user.is_authenticated %}
+                <form action="" method="POST" class="bg-white  ">
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+                      <input type="hidden" id="username" value="{{ request.user }}" name="username">
+                    <div class="btnaction ">
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                    </div>
+
+                </form>
+                 {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_contain %}
